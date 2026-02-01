@@ -19,6 +19,7 @@ class PlanningBlock:
     start: datetime
     end: datetime
     reference_id: Optional[int] = None
+
 @dataclass
 class Conflict:
     """
@@ -27,6 +28,7 @@ class Conflict:
     rule: str
     message: str
     reference_id: Optional[int] = None
+
 @dataclass
 class PlanningInput:
     """
