@@ -19,7 +19,7 @@ class PlanningBlock:
     start: datetime
     end: datetime
     reference_id: Optional[int] = None
-    
+
 @dataclass
 class Conflict:
     """
@@ -36,11 +36,3 @@ class PlanningInput:
     """
     week_start: datetime
     week_end: datetime
-
-@dataclass
-class PlanningResult:
-    """
-    Output of the planning engine.
-    """
-    blocks: list[PlanningBlock]
-    conflicts: list[Conflict]
