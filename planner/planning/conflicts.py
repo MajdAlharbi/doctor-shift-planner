@@ -9,22 +9,20 @@ CONFLICT_MESSAGES: Dict[str, str] = {
 }
 
 def explain_conflict(conflict):
-    message = CONFLICT_MESSAGES.get(
-        conflict.rule,
-        "Scheduling conflict detected."
+ 
+    rule = conflict.rule if hasattr(conflict, "rule") else conflict.get("rule")
+    reference = (
+        conflict.reference
+        if hasattr(conflict, "reference")
+        else conflict.get("reference")
     )
 
-    reference = None
-    if conflict.reference_id:
-        reference = {
-            "id": conflict.reference_id
-        }
-
     return {
-        "rule": conflict.rule,
-        "message": message,
+        "rule": rule,
         "reference": reference,
+        "message": f"Rule violated: {rule}",
     }
+
 
 def explain_conflicts(conflicts):
     return [explain_conflict(c) for c in conflicts]
