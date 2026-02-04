@@ -99,3 +99,40 @@ class EventLog(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user_id} {self.event_type} {self.timestamp}"
+from django.db import models
+from django.conf import settings
+
+
+class WeeklyPlan(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="weekly_plans",
+    )
+    week_start = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "week_start")
+
+    def __str__(self):
+        return f"WeeklyPlan({self.user}, {self.week_start})"
+
+
+class WeeklyPlanVersion(models.Model):
+    plan = models.ForeignKey(
+        WeeklyPlan,
+        on_delete=models.CASCADE,
+        related_name="versions",
+    )
+    version = models.PositiveIntegerField()
+    plan_blocks = models.JSONField()
+    conflicts = models.JSONField()
+    generated_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("plan", "version")
+        ordering = ["-version"]
+
+    def __str__(self):
+        return f"PlanVersion(v{self.version})"
