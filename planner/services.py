@@ -9,7 +9,9 @@ def save_weekly_plan_snapshot(*, user, week_start, plan_blocks, conflicts):
         week_start=week_start,
     )
 
-    last_version = plan.versions.order_by("-version").first()
+    last_version = (
+        plan.versions.order_by("-version").first()
+    )
     next_version = 1 if not last_version else last_version.version + 1
 
     version = WeeklyPlanVersion.objects.create(

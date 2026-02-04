@@ -2,12 +2,44 @@ from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
 from .models import Shift, Commitment, RecoveryRule
 from .planning.engine import PlanningEngine
 from .planning.domain import PlanningInput
 from .planning.conflicts import explain_conflicts
 from .services import save_weekly_plan_snapshot
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+
+from .models import WeeklyPlan
+from .serializers_plan import (
+    WeeklyPlanSerializer,
+    WeeklyPlanVersionSerializer,
+)
+
+
+class WeeklyPlanListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        plans = WeeklyPlan.objects.filter(user=request.user).order_by("-week_start")
+        data = WeeklyPlanSerializer(plans, many=True).data
+        return Response(data)
+
+
+class WeeklyPlanVersionsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, plan_id):
+        plan = get_object_or_404(
+            WeeklyPlan,
+            id=plan_id,
+            user=request.user,
+        )
+        versions = plan.versions.order_by("-version")
+        data = WeeklyPlanVersionSerializer(versions, many=True).data
+        return Response(data)
 
 
 class WeeklyPlanView(APIView):
