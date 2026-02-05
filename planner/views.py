@@ -6,6 +6,8 @@ from .serializers import (
     CommitmentSerializer,
     RecoveryRuleSerializer,
 )
+
+
 class BaseOwnedModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
