@@ -10,6 +10,7 @@ import { MiniWeekCalendar } from "./components/MiniWeekCalendar";
 import { QuickActions } from "./components/QuickActions";
 import { UrgentConflicts } from "./components/UrgentConflicts";
 import { WorkLifeBalance } from "./components/WorkLifeBalance";
+import type { StatCard } from "./types";
 
 export const Dashboard: React.FC = () => {
   const {
@@ -24,9 +25,9 @@ export const Dashboard: React.FC = () => {
   const [showTips, setShowTips] = useState(false);
 
   // ===============================
-  // 📊 Stats Calculation
+  //  Stats Calculation
   // ===============================
-  const stats = useMemo(() => {
+    const stats = useMemo(() => {
     const today = new Date();
     const weekStart = startOfWeek(today, { weekStartsOn: 1 });
     const weekEnd = addDays(weekStart, 6);
@@ -60,15 +61,16 @@ export const Dashboard: React.FC = () => {
     };
   }, [shifts, commitments, conflicts, recoveryRules]);
 
+  
   // ===============================
-  // 🚨 Urgent Conflicts
+  //  Urgent Conflicts
   // ===============================
   const urgentConflicts = conflicts
     .filter((c) => c.status === "active" && c.severity === "high")
     .slice(0, 3);
 
   // ===============================
-  // 📅 Week Days
+  //  Week Days
   // ===============================
   const weekDays = useMemo(() => {
     const today = new Date();
@@ -83,37 +85,38 @@ export const Dashboard: React.FC = () => {
     shifts.find((s) => isSameDay(s.date, date));
 
   // ===============================
-  // 📦 Stat Cards Data
+  //  Stat Cards Data
   // ===============================
-  const statCards = [
-    {
-      title: t("thisWeekShifts"),
-      value: stats.thisWeekShifts,
-      color: "blue",
-    },
-    {
-      title: t("recoveryHours"),
-      value: stats.recoveryHours,
-      color: "green",
-    },
-    {
-      title: t("personalCommitments"),
-      value: stats.personalCommitments,
-      color: "orange",
-    },
-    {
-      title: t("activeConflicts"),
-      value: stats.activeConflicts,
-      color: "red",
-    },
-  ];
+  const statCards: StatCard[] = [
+  {
+    title: t("thisWeekShifts"),
+    value: stats.thisWeekShifts,
+    color: "blue",
+  },
+  {
+    title: t("recoveryHours"),
+    value: stats.recoveryHours,
+    color: "green",
+  },
+  {
+    title: t("personalCommitments"),
+    value: stats.personalCommitments,
+    color: "orange",
+  },
+  {
+    title: t("activeConflicts"),
+    value: stats.activeConflicts,
+    color: "red",
+  },
+];
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* ===============================
-            👋 Welcome Section
+              Welcome Section
         =============================== */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -125,14 +128,14 @@ export const Dashboard: React.FC = () => {
           </p>
         </div>
 
-        {/* ===============================
-            📊 Stats Grid
-        =============================== */}
-        <StatsGrid statCards={statCards} />
+{/* ===============================
+      Stats Grid
+=============================== */}
+<StatsGrid statCards={statCards} />
 
-        {/* ===============================
-            🧱 Main Layout Grid
-        =============================== */}
+{/* ===============================
+      Main Layout Grid
+=============================== */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
 
           {/* Left Side */}
@@ -159,7 +162,7 @@ export const Dashboard: React.FC = () => {
         </div>
 
         {/* ===============================
-            💡 Help Button
+              Help Button
         =============================== */}
         <div className="mt-8 text-center">
           <button
