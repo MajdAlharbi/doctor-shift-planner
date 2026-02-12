@@ -1,5 +1,5 @@
-import { createBrowserRouter } from 'react-router';
-import { Dashboard } from './components/Dashboard';
+import { createBrowserRouter,Outlet } from "react-router-dom";
+import { Dashboard } from './features/dashboard/DashboardPage';
 import { ShiftsManagement } from './components/ShiftsManagement';
 import { WeeklyCalendar } from './components/WeeklyCalendar';
 import { Commitments } from './components/Commitments';
@@ -10,12 +10,12 @@ import { NotFound } from './components/NotFound';
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-20">
       <Header />
       <main className="pb-4">
-        {children}
+        <Outlet/>
       </main>
       <BottomNav />
     </div>
@@ -24,67 +24,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: (
-      <Layout>
-        <Dashboard />
-      </Layout>
-    ),
-  },
-  {
-    path: '/shifts',
-    element: (
-      <Layout>
-        <ShiftsManagement />
-      </Layout>
-    ),
-  },
-  {
-    path: '/calendar',
-    element: (
-      <Layout>
-        <WeeklyCalendar />
-      </Layout>
-    ),
-  },
-  {
-    path: '/commitments',
-    element: (
-      <Layout>
-        <Commitments />
-      </Layout>
-    ),
-  },
-  {
-    path: '/recovery',
-    element: (
-      <Layout>
-        <RecoveryRules />
-      </Layout>
-    ),
-  },
-  {
-    path: '/conflicts',
-    element: (
-      <Layout>
-        <ConflictResolution />
-      </Layout>
-    ),
-  },
-  {
-    path: '/profile',
-    element: (
-      <Layout>
-        <ProfileSettings />
-      </Layout>
-    ),
-  },
-  {
-    path: '*',
-    element: (
-      <Layout>
-        <NotFound />
-      </Layout>
-    ),
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: "shifts", element: <ShiftsManagement /> },
+      { path: "calendar", element: <WeeklyCalendar /> },
+      { path: "commitments", element: <Commitments /> },
+      { path: "recovery", element: <RecoveryRules /> },
+      { path: "conflicts", element: <ConflictResolution /> },
+      { path: "profile", element: <ProfileSettings /> },
+      { path: "*", element: <NotFound /> },
+    ],
   },
 ]);
