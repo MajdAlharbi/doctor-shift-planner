@@ -1,7 +1,7 @@
-export type StatColor = "blue" | "green" | "orange" | "red";
+export type ShiftType = "day" | "night";
 
 export interface StatCard {
   title: string;
   value: number;
-  color: StatColor;
+  color: "blue" | "green" | "orange" | "red";
 }

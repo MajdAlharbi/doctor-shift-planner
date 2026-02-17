@@ -1,11 +1,11 @@
 import { createBrowserRouter,Outlet } from "react-router-dom";
 import { Dashboard } from './features/dashboard/DashboardPage';
-import { ShiftsManagement } from './components/ShiftsManagement';
-import { WeeklyCalendar } from './components/WeeklyCalendar';
-import { Commitments } from './components/Commitments';
-import { RecoveryRules } from './components/RecoveryRules';
-import { ConflictResolution } from './components/ConflictResolution';
-import { ProfileSettings } from './components/ProfileSettings';
+import { ShiftsManagement } from "./features/shifts/ShiftsPage";
+import { WeeklyCalendar } from "./features/calendar/CalendarPage";
+import { Commitments } from "./features/commitments/CommitmentsPage";
+import { RecoveryRules } from "./features/recovery/RecoveryPage";
+import { ConflictResolution } from "./features/conflicts/ConflictsPage";
+import { ProfileSettings } from "./features/profile/ProfilePage";
 import { NotFound } from './components/NotFound';
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
