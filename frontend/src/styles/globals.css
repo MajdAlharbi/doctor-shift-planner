@@ -1,7 +1,7 @@
-@custom-variant dark (&:is(.dark *));
-
 /* Import Noto Sans Arabic for proper Arabic typography */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --font-size: 16px;

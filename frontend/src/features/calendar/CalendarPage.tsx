@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { format, startOfWeek, addDays, addHours, isSameDay, parse } from 'date-fns';
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
-import { CalendarEvent } from '../types';
+import { useApp } from '../../contexts/AppContext';
+import { CalendarEvent } from '../../types';
 
 export const WeeklyCalendar: React.FC = () => {
   const { shifts, commitments, recoveryRules, updateCommitment, t } = useApp();

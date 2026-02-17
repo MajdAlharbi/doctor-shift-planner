@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Lightbulb } from "lucide-react";
 
 import { useApp } from "../../contexts/AppContext";
-import { QuickTips } from "../../components/QuickTips";
+import { QuickTips } from "./components/QuickTips";
 
 import { StatsGrid } from "./components/StatsGrid";
 import { MiniWeekCalendar } from "./components/MiniWeekCalendar";
@@ -11,24 +11,31 @@ import { UrgentConflicts } from "./components/UrgentConflicts";
 import { WorkLifeBalance } from "./components/WorkLifeBalance";
 
 import type { StatCard } from "./types";
-import { useDashboardStats } from "./hooks/seDashboardStats";
+import { useDashboardStats } from "./hooks/useDashboardStats";
 
 export const Dashboard: React.FC = () => {
   const { profile, t, shifts } = useApp();
   const [showTips, setShowTips] = useState(false);
 
-  const {
-    stats,
-    urgentConflicts,
-    weekDays,
-    getShiftForDay,
-  } = useDashboardStats();
+const {
+  totalShiftMinutes,
+  weeklyShiftCount,
+  nightShiftCount,
+  commitmentsOnShiftDays,
+  recoveryCompliance,
+  workLifeScore,
+  burnoutRisk,
+  urgentConflicts,
+  weekDays,
+  getShiftForDay,
+} = useDashboardStats();
+
 
   const statCards: StatCard[] = [
-    { title: t("thisWeekShifts"), value: stats.thisWeekShifts, color: "blue" },
-    { title: t("recoveryHours"), value: stats.recoveryHours, color: "green" },
-    { title: t("personalCommitments"), value: stats.personalCommitments, color: "orange" },
-    { title: t("activeConflicts"), value: stats.activeConflicts, color: "red" },
+    { title: t("thisWeekShifts"), value: weeklyShiftCount, color: "blue" },
+    { title: t("recoveryHours"), value: recoveryCompliance, color: "green" },
+    { title: t("personalCommitments"), value: commitmentsOnShiftDays, color: "orange" },
+    { title: t("activeConflicts"), value: urgentConflicts.length, color: "red" },
   ];
 
   return (
@@ -59,9 +66,10 @@ export const Dashboard: React.FC = () => {
           <div className="space-y-8">
             <QuickActions />
             <WorkLifeBalance
-              score={stats.workLifeBalance}
-              maxShifts={stats.maxShifts}
-            />
+  score={workLifeScore}
+  maxShifts={5}
+/>
+
           </div>
 
         </div>

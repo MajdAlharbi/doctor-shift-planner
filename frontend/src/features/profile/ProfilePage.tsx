@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { User, Stethoscope, Building2, Save, Globe, Monitor, Bell, Clock } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
+import { useApp } from '../../contexts/AppContext';
 
 export const ProfileSettings: React.FC = () => {
   const { profile, setProfile, preferences, setPreferences, language, setLanguage, theme, setTheme, t } = useApp();

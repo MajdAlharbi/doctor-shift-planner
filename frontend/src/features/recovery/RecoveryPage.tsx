@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Save, RotateCcw, Moon, Clock, Shield, Activity } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
-import { RecoveryRules as RecoveryRulesType } from '../types';
+import { useApp } from '../../contexts/AppContext';
+import { RecoveryRules as RecoveryRulesType } from '../../types';
 
 export const RecoveryRules: React.FC = () => {
   const { recoveryRules, setRecoveryRules, t } = useApp();

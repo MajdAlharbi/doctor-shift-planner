@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Calendar, Clock, MapPin, Repeat } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
-import { Shift, ShiftType, RepeatOption } from '../types';
+import { useApp } from '../../contexts/AppContext';
+import { Shift, ShiftType, RepeatOption } from '../../types';
 import { format } from 'date-fns';
 
 export const ShiftsManagement: React.FC = () => {

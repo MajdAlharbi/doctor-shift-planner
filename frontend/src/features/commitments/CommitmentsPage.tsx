@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Calendar, Clock, AlertCircle, CheckCircle } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
-import { PersonalCommitment, Priority } from '../types';
+import { useApp } from '../../contexts/AppContext';
+import { PersonalCommitment, Priority } from '../../types';
 import { format } from 'date-fns';
 
 export const Commitments: React.FC = () => {

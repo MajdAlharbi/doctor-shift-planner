@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AlertTriangle, CheckCircle, XCircle, Clock as ClockIcon, Filter } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
-import { ConflictStatus } from '../types';
+import { useApp } from '../../contexts/AppContext';
+import { ConflictStatus } from '../../types';
 import { format } from 'date-fns';
 
 export const ConflictResolution: React.FC = () => {
